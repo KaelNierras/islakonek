@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .content {
+    @apply overflow-auto;
+    height: calc(100vh - 140px);
+  }
+}
+
+#map {
+  width: 100%;
+  /* ensures the map takes the full width of its parent container */
+  height: 450px;
+  /* you can adjust the height as needed */
+  border-radius: 8px;
+  /* optional, for rounded corners */
+
+  margin-bottom: 30px;
+}
+
+.scrollable-container {
+  max-height: 510px;
+  /* Adjust the height as needed */
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+}
+
+@media (max-width: 768px) {
+  #map {
+      height: 300px;
+      /* smaller height on mobile devices */
+  }
+}
+
