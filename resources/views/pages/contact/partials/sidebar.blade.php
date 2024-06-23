@@ -2,14 +2,12 @@
     <div class="mb-4">
         <div class="flex flex-row gap-3">
             <x-bladewind::input placeholder="Search..." clearable="true" wire:model.live="search"
-            class="rounded-lg border-gray-300 h-10" />
+                class="rounded-lg border-gray-300 h-10" />
 
-            <select name="complete_location"
-                wire:model.live="search"
+            <select name="complete_location" wire:model.live="search"
                 class="border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 w-1/2 mb-3 p-2 h-10 rounded-lg">
                 @foreach ($locations as $location)
-                    <option
-                        value="{{$location['location']}}">
+                    <option value="{{ $location['location'] }}">
                         {{ $location['location'] }}</option>
                 @endforeach
             </select>
@@ -27,7 +25,16 @@
                     </div>
                 </li>
             @empty
-                <li class="text-center text-gray-500">No contacts found.</li>
+                <x-bladewind::empty-state show_image="false">
+                    <div class="flex flex-col justify-center w-full">
+                        <div class="flex justify-center">
+                            @include('components.icon-phone');
+                        </div>
+
+                        <p class="pt-2">You have no contact data available</p>
+                    </div>
+
+                </x-bladewind::empty-state>
             @endforelse
         </ul>
     </div>

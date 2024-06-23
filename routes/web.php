@@ -2,17 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/pangan-an', function () {
     return view('pages.pangan-an.index');
@@ -28,6 +25,8 @@ Route::get('/gilutungan', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('contacts', ContactController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('dashboard', DashboardController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
