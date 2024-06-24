@@ -20,10 +20,9 @@
     @if (!is_null($selectedContact) && $selectedContact->longitude && $selectedContact->latitude)
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                console.log("Initializing map...");
                 var map = L.map('map').setView([{{ $selectedContact->longitude }}, {{ $selectedContact->latitude }}],
                     16);
-
+                map.invalidateSize();
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -31,7 +30,6 @@
 
                 L.marker([{{ $selectedContact->longitude }}, {{ $selectedContact->latitude }}]).addTo(map);
 
-                map.invalidateSize();
             });
         </script>
     @endif
@@ -39,7 +37,6 @@
     <script>
         function saveProfile() {
             if (validateForm('.profile-form')) {
-                //showNotification('Added Successful', 'Your contact was added successfully');
                 domEl('.profile-form').submit();
             } else {
                 return false;
@@ -48,11 +45,14 @@
 
         function updateProfile() {
             if (validateForm('.edit-form')) {
-                //showNotification('Updated Successful', 'Your contact was updated successfully');
                 domEl('.edit-form').submit();
             } else {
                 return false;
             }
+        }
+
+        function confirmDelete () {
+            domEl('.delete-form').submit();
         }
     </script>
 </div>

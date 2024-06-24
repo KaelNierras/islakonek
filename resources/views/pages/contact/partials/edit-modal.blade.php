@@ -32,5 +32,4 @@
                 class="rounded border-2 border-gray-200  focus:outline-none focus:ring-2 focus:ring-gray-200" />
         </form>
     </x-bladewind::modal>
-
 </section>
