@@ -11,14 +11,26 @@ class ContactDetails extends Component
     public $selectedContact;
     public $search = '';
 
+    public $currentLongitude;
+    public $currentLatitude;
+
     public function mount()
     {
-        $this->selectedContact = Contact::first();
+        $selectedContactId = session('selectedContactId', Contact::first()->id);
+        $this->selectedContact = Contact::find($selectedContactId);
     }
-
+    
     public function showContact($id)
     {
         $this->selectedContact = Contact::find($id);
+        session(['selectedContactId' => $id]); // Save the selected contact ID to the session
+        return redirect()->to(request()->header('Referer'));
+    }
+    
+    // Optionally, if you need to explicitly save the selected contact ID elsewhere
+    public function saveSelectedContactId($id)
+    {
+        session(['selectedContactId' => $id]);
     }
 
     public function render()

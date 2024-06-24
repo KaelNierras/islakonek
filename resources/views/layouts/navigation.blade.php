@@ -30,6 +30,14 @@
                     </x-nav-link>
                 </div>
 
+                
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('island.index')" :active="request()->routeIs('island.index')">
+                        {{ __('Islands') }}
+                    </x-nav-link>
+                </div>
+
 
                 {{-- <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('pangan-an')" :active="request()->routeIs('pangan-an')">

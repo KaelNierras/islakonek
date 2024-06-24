@@ -1,4 +1,14 @@
 <div>
+    @push('styles')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    @endpush
+
+    @push('scripts')
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    @endpush
+
     @include('pages.contact.partials.edit-modal')
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         <div class="drop-shadow p-5 bg-white rounded-xl col-span-2 flex flex-col">
@@ -54,5 +64,7 @@
         function confirmDelete () {
             domEl('.delete-form').submit();
         }
+
+        
     </script>
 </div>

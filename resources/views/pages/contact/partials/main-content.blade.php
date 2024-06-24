@@ -21,8 +21,6 @@
                 <x-bladewind::button onclick="showModal('delete_confirm')" color="none">
                     <x-bladewind::icon class="text-red-500 p-0" name="trash" />
                 </x-bladewind::button>
-
-
             </div>
         @endif
     </div>
@@ -43,6 +41,6 @@
         @endif
     </div>
     <hr class="my-4">
-    <div id="map" wire:ignore class="z-10"></div>
+    <div id="map" class="z-10"></div>
 
 </section>

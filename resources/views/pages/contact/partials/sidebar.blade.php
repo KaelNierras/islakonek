@@ -16,7 +16,7 @@
     <div class="scrollable-container">
         <ul class="space-y-3 pr-5">
             @forelse ($contacts as $contact)
-                <li wire:click="showContact({{ $contact->id }})"
+                <li wire:click="showContact({{ $contact->id }})"    
                     class="group rounded-tl-xl rounded-bl-xl flex p-1 items-center space-x-2 hover:bg-gray-100 transition-colors duration-200 hover:border-r-2 hover:border-gray-500 cursor-pointer relative {{ $selectedContact->id == $contact->id ? 'bg-gray-200 border-r-2 border-gray-500' : '' }}">
                     <x-bladewind::icon name="user-circle" class="h-12 w-12 text-blue-500" />
                     <div class="flex flex-row items-center justify-between w-full">
