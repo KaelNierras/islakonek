@@ -5,10 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-8 px-4">
+    <div class="py-6 px-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <div class="flex flex-col sm:flex-row justify-start gap-5 sm:gap-10 mb-10">
+            <div class="flex flex-col sm:flex-row justify-start gap-5 sm:gap-6 mb-5">
                 <x-bladewind::statistic icon_position="right" number="{{ $totalUsers }}" label="Total users">
                     <x-slot name="icon">
                         <svg class="h-16 w-16 p-3 text-white rounded-full bg-blue-500">
@@ -39,7 +38,7 @@
                         Explore Our Locations
                     </h3>
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                        Click on any marker to view more details or navigate to the contacts page.
+                        Click on any marker to view more details about the Island.
                     </p>
                     <div id="map" class="z-10 mt-4"></div>
                 </div>

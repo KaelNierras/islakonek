@@ -19,14 +19,14 @@
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
-                        {{ __('Contact') }}
+                        {{ __('Contacts') }}
                     </x-nav-link>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                        {{ __('User') }}
+                        {{ __('Users') }}
                     </x-nav-link>
                 </div>
 
@@ -110,13 +110,13 @@
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
-                {{ __('Contact') }}
+                {{ __('Contacts') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                {{ __('User') }}
+                {{ __('Users') }}
             </x-responsive-nav-link>
         </div>
 

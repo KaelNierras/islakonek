@@ -5,7 +5,13 @@
                 {{ __('Gilutungan Island') }} 
                 @include('components.island')
             </div>
+            
         </h2>
+        <div class="flex flex-col sm:flex-row gap-3">
+            <x-bladewind::statistic number="1,606 (2020)" label="Total population" />
+            <x-bladewind::statistic number="0.050 sq mi" label="Total area" />
+            <x-bladewind::statistic number="32,120/sq mi" label="Populity Density" />
+        </div>
     </x-slot>
 
     <div class="py-12 bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen">
@@ -32,6 +38,7 @@
                             your trip now and experience the beauty of this hidden gem in Cebu!
                         </p>
                     </div>
+                    
                     <div class="flex justify-center bg-blue-50 py-10 rounded-lg">
                         <div class="w-full md:w-8/12 lg:w-6/12">
                             <div class="mb-4 text-center">

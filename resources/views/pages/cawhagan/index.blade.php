@@ -6,6 +6,11 @@
                 @include('components.island')
             </div>
         </h2>
+        <div class="flex flex-col sm:flex-row gap-3">
+            <x-bladewind::statistic number="694 (2020)" label="Total population" />
+            <x-bladewind::statistic number="0.019 sq mi" label="Total area" />
+            <x-bladewind::statistic number="36,526/sq mi" label="Populity Density" />
+        </div>
     </x-slot>
 
     <div class="py-12 bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen">
