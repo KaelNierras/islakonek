@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Island;
 
 class IslandController extends Controller
 {
@@ -11,7 +12,8 @@ class IslandController extends Controller
      */
     public function index()
     {
-        return view('pages.island.index'); 
+        $islands = Island::all();
+        return view('pages.island.index', compact('islands')); 
     }
 
     /**
