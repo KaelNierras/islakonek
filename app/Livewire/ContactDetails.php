@@ -23,11 +23,10 @@ class ContactDetails extends Component
     public function showContact($id)
     {
         $this->selectedContact = Contact::find($id);
-        session(['selectedContactId' => $id]); // Save the selected contact ID to the session
+        session(['selectedContactId' => $id]);
         return redirect()->to(request()->header('Referer'));
     }
     
-    // Optionally, if you need to explicitly save the selected contact ID elsewhere
     public function saveSelectedContactId($id)
     {
         session(['selectedContactId' => $id]);
