@@ -27,7 +27,7 @@
                             diving enthusiasts, as it is home to a diverse range of coral reefs and
                             marine species.
                         </p>
-                        <p class="text-gray-700 mb-4 font-poppins">
+                        <p class="text-gray-700 mb-4 font-poppins text-j">
                             Apart from its natural beauty, Gilutungan also offers various recreational
                             activities such as island hopping, fishing, and beach volleyball. Visitors
                             can also indulge in delicious seafood dishes prepared by the locals.
