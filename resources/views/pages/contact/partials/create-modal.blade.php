@@ -4,7 +4,7 @@
 
         <form method="post" action="{{ route('contacts.store') }}" class="profile-form">
             @csrf
-            <b class="mt-0">Add Contact</b>
+            <h5 class="mt-0 text-lg">Add Contact</h5>
             <div class="grid grid-cols-2 gap-4 mt-6">
                 <x-bladewind::input required="true" name="first_name" error_message="Please enter your first name"
                     label="First name"
@@ -21,8 +21,8 @@
                 class="rounded border-2 border-gray-200  focus:outline-none focus:ring-2 focus:ring-gray-200 w-full mb-3">
                 @foreach ($locations as $location)
                     <option
-                        value="{{ $location['x'] . ',' . $location['y'] . ',' . $location['location'] }}">
-                        {{ $location['location'] }}</option>
+                        value="{{ $location->longitude . ',' . $location->latitude . ',' . $location->name }}">
+                        {{ $location->name }}</option>
                 @endforeach
             </select>
 

@@ -54,7 +54,5 @@
         function confirmDelete () {
             domEl('.delete-form').submit();
         }
-
-        
     </script>
 </div>

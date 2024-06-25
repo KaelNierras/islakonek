@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use App\Models\Group;
+use App\Models\Island;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -11,16 +11,10 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
 
-        $locations = [
-            ['location' => 'Pangan-an', 'x' => '10.219695', 'y' => '124.038477'],
-            ['location' => 'Cawhagan', 'x' => '10.202674', 'y' => '124.019186'],
-            ['location' => 'Gilutongan', 'x' => '10.206961', 'y' => '123.988824'],
+        $locations = Island::all();
 
-        ];
-
-        return view('pages.contact.index', compact('contacts', 'locations'));
+        return view('pages.contact.index', compact('locations'));
     }
 
     public function create()

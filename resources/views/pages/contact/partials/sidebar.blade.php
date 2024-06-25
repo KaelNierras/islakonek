@@ -7,8 +7,8 @@
             <select name="complete_location" wire:model.live="search"
                 class="border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 w-1/2 mb-3 p-2 h-10 rounded-lg">
                 @foreach ($locations as $location)
-                    <option value="{{ $location['location'] }}">
-                        {{ $location['location'] }}</option>
+                    <option value="{{ $location->name }}">
+                        {{ $location->name }}</option>
                 @endforeach
             </select>
         </div>

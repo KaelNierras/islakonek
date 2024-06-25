@@ -5,7 +5,7 @@
         <form method="post" action="{{ route('contacts.update', $selectedContact->id ?? '') }}" class="edit-form">
             @csrf
             @method('PUT')
-            <b class="mt-0">Edit Contact</b>
+            <h5 class="mt-0 text-lg">Edit Contact</h5>
             <div class="grid grid-cols-2 gap-4 mt-6">
                 <x-bladewind::input required="true" name="first_name" error_message="Please enter your first name"
                     label="First name" value="{{ $selectedContact->first_name ?? '' }}"

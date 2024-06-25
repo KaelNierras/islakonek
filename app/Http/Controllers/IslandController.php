@@ -12,8 +12,7 @@ class IslandController extends Controller
      */
     public function index()
     {
-        $islands = Island::all();
-        return view('pages.island.index', compact('islands')); 
+        return view('pages.island.index'); 
     }
 
     /**
@@ -29,7 +28,16 @@ class IslandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //dd($request->all());
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'latitude' => 'required|decimal:0,6',
+            'longitude' => 'required|decimal:0,6',
+        ]);
+
+        Island::create($data);
+        return redirect()->route('island.index')->with('success', 'Island created successfully.');
     }
 
     /**
@@ -51,16 +59,31 @@ class IslandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Island $island)
     {
-        //
+        //dd($request->all());
+        try {
+            //dd($request->all());
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'latitude' => 'required|decimal:0,6',
+                'longitude' => 'required|decimal:0,6',
+            ]);
+
+            $island->update($request->all());
+            return redirect()->route('island.index')->with('success', 'Island updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('island.index')->with('error', 'Failed to update island: ' . $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Island $island)
     {
-        //
+        //dd($island);    
+        $island->delete();
+        return redirect()->route('island.index')->with('success', 'Island deleted successfully.');
     }
 }
