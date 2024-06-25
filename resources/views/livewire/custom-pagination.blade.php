@@ -2,8 +2,20 @@
     <nav aria-label="Page navigation example" class="flex justify-between items-center">
         
         {{-- Additional Info Section --}}
-        <div class="text-sm text-gray-400">
-            Showing {{ $paginator->currentPage() }} to {{ $paginator->lastPage() }} of {{ $paginator->total() }} results
+        <div>
+            <p class="text-sm text-gray-400 leading-5">
+                {!! __('Showing') !!}
+                @if ($paginator->firstItem())
+                    <span class="font-medium">{{ $paginator->firstItem() }}</span>
+                    {!! __('to') !!}
+                    <span class="font-medium">{{ $paginator->lastItem() }}</span>
+                @else
+                    {{ $paginator->count() }}
+                @endif
+                {!! __('of') !!}
+                <span class="font-medium">{{ $paginator->total() }}</span>
+                {!! __('results') !!}
+            </p>
         </div>
 
         <ul class="inline-flex items-center -space-x-px">

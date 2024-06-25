@@ -20,7 +20,7 @@
         </div>
         <div class="flex flex-col gap-4 m-3">
             <x-bladewind::table exclude_columns="id" searchable="true" search_placeholder="Search..." class="rounded"
-                :action_icons="$action_icons">
+                >
                 <x-slot name="header">
                     <th>Name</th>
                     <th>Longitude</th>
@@ -33,12 +33,12 @@
                         <td>{{ $island->longitude }}</td>
                         <td>{{ $island->latitude }}</td>
                         <td>
-                            <div class="flex gap-2 max-w-10">
-                                <x-bladewind::button class="mx-auto block p-0" wire:click="getIsland({{ $island->id }})" color="none">
+                            <div class="flex gap-2 max-w-10 gap-5">
+                                <x-bladewind::button class="mx-auto block p-0" @click="showEditIslandModal()" color="none">
                                     <x-bladewind::icon name="pencil-square" class="!h-6 !w-6 text-blue-500" />
                                 </x-bladewind::button>
-                                <x-bladewind::button onclick="showModal('delete_island')" color="none">
-                                    <x-bladewind::icon class="text-red-500 p-0" name="trash" />
+                                <x-bladewind::button class="mx-auto block p-0" onclick="showModal('delete_island')" color="none">
+                                    <x-bladewind::icon class="text-red-500" name="trash" />
                                 </x-bladewind::button>
                             </div>
                         </td>
@@ -46,7 +46,7 @@
                 @endforeach
             </x-bladewind::table>
             <div class="mt-4">
-                {{ $islands->links('livewire.custom-pagination') }}
+                {{ $islands->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>
@@ -57,6 +57,10 @@
 
         function showAddIslandModal() {
             showModal('add-island');
+        }
+
+        function showEditIslandModal() {
+            showModal('edit_island');
         }
 
         window.addEventListener('show-modal', function () {
