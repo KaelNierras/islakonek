@@ -1,6 +1,6 @@
 <section>
     <x-bladewind::modal backdrop_can_close="true" name="delete_confirm" ok_button_action="confirmDelete()"
-        ok_button_label="Delete" size="big" close_after_action="false" type="warning" title="Confirm User Deletion">
+        ok_button_label="Delete" size="big" close_after_action="false" type="warning" title="Confirm Contact Deletion">
 
         @if($selectedContact)
             <form method="post" action="{{ route('contacts.destroy', $selectedContact->id) }}" class="delete-form">

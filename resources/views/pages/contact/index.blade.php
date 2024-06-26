@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center gap-3">
             {{ __('Contact') }}
+            <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-500 text-white text-sm p-2">
+                {{ $contactsCount }}
+            </span>
         </h2>
     </x-slot>
     @include('components.notifications')

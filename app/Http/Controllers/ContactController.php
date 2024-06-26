@@ -13,8 +13,9 @@ class ContactController extends Controller
     {
 
         $locations = Island::all();
+        $contactsCount = Contact::count(); // Assuming you have a Contact model
 
-        return view('pages.contact.index', compact('locations'));
+        return view('pages.contact.index', compact('locations', 'contactsCount'));
     }
 
     public function create()

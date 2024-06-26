@@ -14,7 +14,7 @@
                 </svg>
             </x-slot>
         </x-bladewind::statistic>
-        <x-bladewind::statistic icon_position="right" number="3" label="Total Island">
+        <x-bladewind::statistic icon_position="right" number="{{ $totalIsland }}" label="Total Island">
             <x-slot name="icon">
                 <svg class="h-16 w-16 p-3 text-white rounded-full bg-green-500">
                     <x-bladewind::icon name="chart-bar" class="h-16 w-16 text-white" />

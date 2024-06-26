@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Island;
+use App\Models\Contact;
 
 class IslandController extends Controller
 {
@@ -12,7 +13,8 @@ class IslandController extends Controller
      */
     public function index()
     {
-        return view('pages.island.index');
+        $islandsCount = Island::count();
+        return view('pages.island.index', compact('islandsCount'));
     }
 
     /**
@@ -105,17 +107,16 @@ class IslandController extends Controller
      */
     public function destroy(Island $island)
     {
-        try {
-            // Check if the island has any associated contacts
-            if ($island->contacts()->exists()) {
-                return redirect()->route('island.index')->with('error', 'Island cannot be deleted because it has associated contacts.');
-            }
+        // Assuming you have a Contact model and it has a 'location' field
+        $contactExists = Contact::where('location', 'like', '%' . $island->name . '%')->exists();
 
-            $island->delete();
-            return redirect()->route('island.index')->with('success', 'Island deleted successfully.');
-        } catch (\Exception $e) {
-            // Log the error or handle it as needed
-            return redirect()->route('island.index')->with('error', 'Error deleting island: ' . $e->getMessage());
+        if ($contactExists) {
+            // Redirect back with an error message if a contact's location includes the island's name
+            return redirect()->route('island.index')->with('error', 'Island cannot be deleted because there is a existing contact associated with it.');
         }
+
+        // Proceed with deletion if no contact's location includes the island's name
+        $island->delete();
+        return redirect()->route('island.index')->with('success', 'Island deleted successfully.');
     }
 }

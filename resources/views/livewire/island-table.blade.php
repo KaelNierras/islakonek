@@ -38,7 +38,7 @@
                                     <x-bladewind::icon name="pencil-square" class="!h-6 !w-6 text-blue-500" />
                                 </x-bladewind::button>
                                 <x-bladewind::button class="mx-auto block p-0"
-                                    onclick="showModal('delete_island', {{ $island->id }})" color="none">
+                                    onclick="showModalDelete({{ $island->id }})" color="none">
                                     <x-bladewind::icon class="text-red-500" name="trash" />
                                 </x-bladewind::button>
                             </div>
@@ -47,8 +47,8 @@
                 @endforeach
             </x-bladewind::table>
             <div class="mt-4">
-                {{-- {{ $islands->links('livewire.custom-pagination') }} --}}
-                {{ $islands->links('vendor.pagination.tailwind') }}
+                {{ $islands->links('livewire.custom-pagination') }}
+                {{-- {{ $islands->links('vendor.pagination.tailwind') }} --}}
             </div>
         </div>
     </div>
@@ -61,6 +61,17 @@
         function showAddIslandModal() {
             showModal('add-island');
             invalidateMapSize();
+        }
+
+        function showModalDelete(islandId) {
+            Livewire.dispatch('get-island', {
+                id: islandId
+            });
+            // Introduce a slight delay before showing the modal
+            setTimeout(function() {
+                showModal('delete_island');
+            }, 1000); // Adjust the delay as needed
+            
         }
 
         function showEditIslandModal(islandId) {
