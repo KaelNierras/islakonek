@@ -61,9 +61,7 @@ class IslandController extends Controller
      */
     public function update(Request $request, Island $island)
     {
-        //dd($request->all());
         try {
-            //dd($request->all());
             $request->validate([
                 'name' => 'required|string|max:255',
                 'latitude_edit' => 'required|numeric',
@@ -76,15 +74,21 @@ class IslandController extends Controller
             
             $request['longitude'] = $request['longitude_edit'];
             unset($request['longitude_edit']);
-
-            //dd($request->all());
             
-            // Now, $validatedData contains 'latitude' and 'longitude' keys instead of 'latitude_edit' and 'longitude_edit'
-
+            // Retrieve all contacts associated with the island
+            $contacts = $island->contacts;
+    
+            // Update the location of each contact to the new island name
+            foreach ($contacts as $contact) {
+                $contact->location = $request['name'];
+                $contact->save();
+            }
+    
+            // Update the island
             $island->update($request->all());
-            return redirect()->route('island.index')->with('success', 'Island updated successfully.');
+            return redirect()->route('island.index')->with('success', 'Island and associated contacts updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('island.index')->with('error', 'Failed to update island: ' . $e->getMessage());
+            return redirect()->route('island.index')->with('error', 'Failed to update island and contacts: ' . $e->getMessage());
         }
     }
 
