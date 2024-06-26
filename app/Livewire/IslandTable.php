@@ -24,7 +24,7 @@ class IslandTable extends Component
     {
         //dd($id);
         $this->editIsland = Island::find($id);
-        //dd($this->editIsland);
+        // dd($this->editIsland);
         //$this->dispatch('show-modal');
     }
 

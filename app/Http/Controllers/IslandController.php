@@ -12,7 +12,7 @@ class IslandController extends Controller
      */
     public function index()
     {
-        return view('pages.island.index'); 
+        return view('pages.island.index');
     }
 
     /**
@@ -28,18 +28,16 @@ class IslandController extends Controller
      */
     public function store(Request $request)
     {
-
         //dd($request->all());
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'latitude' => 'required|decimal:0,6',
-            'longitude' => 'required|decimal:0,6',
+            'name' => 'required|string|max:255|unique:islands,name',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
         ]);
-
+    
         Island::create($data);
         return redirect()->route('island.index')->with('success', 'Island created successfully.');
     }
-
     /**
      * Display the specified resource.
      */
@@ -63,27 +61,32 @@ class IslandController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:islands,name',
                 'latitude_edit' => 'required|numeric',
                 'longitude_edit' => 'required|numeric',
             ]);
-            
+
             // Change keys from latitude_edit and longitude_edit to latitude and longitude
             $request['latitude'] = $request['latitude_edit'];
             unset($request['latitude_edit']);
-            
+
             $request['longitude'] = $request['longitude_edit'];
             unset($request['longitude_edit']);
-            
+
             // Retrieve all contacts associated with the island
             $contacts = $island->contacts;
-    
+
             // Update the location of each contact to the new island name
+
+
+            // Update the location, latitude, and longitude of each contact to match the new island details
             foreach ($contacts as $contact) {
                 $contact->location = $request['name'];
+                $contact->latitude = $request['latitude'];
+                $contact->longitude = $request['longitude'];
                 $contact->save();
             }
-    
+
             // Update the island
             $island->update($request->all());
             return redirect()->route('island.index')->with('success', 'Island and associated contacts updated successfully.');

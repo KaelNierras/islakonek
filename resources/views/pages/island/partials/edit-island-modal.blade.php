@@ -47,38 +47,39 @@
             window.location.reload();
         }
 
-        @if ($editIsland)
-            // Initialize the map in edit mode
-            var mapEdit = L.map('mapEdit').setView([{{ $editIsland->latitude }}, {{ $editIsland->longitude }}], 14);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(mapEdit);
+        console.log({{ $editIsland->latitude }});
+        console.log({{ $editIsland->longitude }});
 
-            // Invalidate size after the map is initialized
+        // Initialize the map in edit mode
+        var mapEdit = L.map('mapEdit').setView([{{ $editIsland->latitude }}, {{ $editIsland->longitude }}], 14);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(mapEdit);
+
+        // Invalidate size after the map is initialized
+        mapEdit.invalidateSize();
+
+        var popupEdit = L.popup();
+
+        function onMapClickEdit(e) {
+            var lat = parseFloat(e.latlng.lat.toFixed(6));
+            var lng = parseFloat(e.latlng.lng.toFixed(6));
+
+            document.querySelector('input[name="longitude_edit"]').value = lng;
+            document.querySelector('input[name="latitude_edit"]').value = lat;
+
+            popupEdit
+                .setLatLng(e.latlng)
+                .setContent("Coordinates set to: " + e.latlng.toString())
+                .openOn(mapEdit);
+        }
+
+        mapEdit.on('click', onMapClickEdit);
+
+        function invalidateMapSizeEdit() {
             mapEdit.invalidateSize();
-
-            var popupEdit = L.popup();
-
-            function onMapClickEdit(e) {
-                var lat = parseFloat(e.latlng.lat.toFixed(6));
-                var lng = parseFloat(e.latlng.lng.toFixed(6));
-
-                document.querySelector('input[name="longitude_edit"]').value = lng;
-                document.querySelector('input[name="latitude_edit"]').value = lat;
-
-                popupEdit
-                    .setLatLng(e.latlng)
-                    .setContent("Coordinates set to: " + e.latlng.toString())
-                    .openOn(mapEdit);
-            }
-
-            mapEdit.on('click', onMapClickEdit);
-
-            function invalidateMapSizeEdit() {
-                mapEdit.invalidateSize();
-            }
-        @endif
+        }
     </script>
 
 </section>
