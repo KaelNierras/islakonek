@@ -66,9 +66,20 @@ class IslandController extends Controller
             //dd($request->all());
             $request->validate([
                 'name' => 'required|string|max:255',
-                'latitude' => 'required|decimal:0,6',
-                'longitude' => 'required|decimal:0,6',
+                'latitude_edit' => 'required|numeric',
+                'longitude_edit' => 'required|numeric',
             ]);
+            
+            // Change keys from latitude_edit and longitude_edit to latitude and longitude
+            $request['latitude'] = $request['latitude_edit'];
+            unset($request['latitude_edit']);
+            
+            $request['longitude'] = $request['longitude_edit'];
+            unset($request['longitude_edit']);
+
+            //dd($request->all());
+            
+            // Now, $validatedData contains 'latitude' and 'longitude' keys instead of 'latitude_edit' and 'longitude_edit'
 
             $island->update($request->all());
             return redirect()->route('island.index')->with('success', 'Island updated successfully.');
@@ -82,8 +93,17 @@ class IslandController extends Controller
      */
     public function destroy(Island $island)
     {
-        //dd($island);    
-        $island->delete();
-        return redirect()->route('island.index')->with('success', 'Island deleted successfully.');
+        try {
+            // Check if the island has any associated contacts
+            if ($island->contacts()->exists()) {
+                return redirect()->route('island.index')->with('error', 'Island cannot be deleted because it has associated contacts.');
+            }
+
+            $island->delete();
+            return redirect()->route('island.index')->with('success', 'Island deleted successfully.');
+        } catch (\Exception $e) {
+            // Log the error or handle it as needed
+            return redirect()->route('island.index')->with('error', 'Error deleting island: ' . $e->getMessage());
+        }
     }
 }

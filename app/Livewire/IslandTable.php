@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Island;
 use Livewire\WithPagination;
+use Livewire\Attributes\On; 
 
 class IslandTable extends Component
 {
@@ -18,12 +19,13 @@ class IslandTable extends Component
         $this->editIsland = Island::first();
     }
 
+    #[On('get-island')]
     public function getIsland($id)
     {
         //dd($id);
         $this->editIsland = Island::find($id);
         //dd($this->editIsland);
-        $this->dispatch('show-modal');
+        //$this->dispatch('show-modal');
     }
 
     public function render()

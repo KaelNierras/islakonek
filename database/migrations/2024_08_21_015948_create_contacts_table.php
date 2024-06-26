@@ -10,6 +10,7 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('island_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('age')->nullable();
@@ -19,6 +20,8 @@ class CreateContactsTable extends Migration
             $table->text('location')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            // Foreign key constraint
+            $table->foreign('island_id')->references('id')->on('islands')->onDelete('cascade');
         });
     }
 

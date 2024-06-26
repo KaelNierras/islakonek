@@ -14,20 +14,17 @@
             </div>
 
             <div class="grid grid-cols-2 gap-4 mt-0">
-                <x-bladewind::input required="true" name="longitude"
-                    class="rounded border-2 border-gray-200  focus:outline-none focus:ring-2 focus:ring-gray-200"
-                    error_message="Please enter your longitude coordinates" label="Longitude" />
-
                 <x-bladewind::input required="true" name="latitude"
                     class="rounded border-2 border-gray-200  focus:outline-none focus:ring-2 focus:ring-gray-200"
                     error_message="Please enter your latitude coordinates" label="Latitude" />
+                    <x-bladewind::input required="true" name="longitude"
+                    class="rounded border-2 border-gray-200  focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    error_message="Please enter your longitude coordinates" label="Longitude" />
             </div>
             <!-- Instruction for users -->
             <p class="text-center mt-4 text-red-500">Click on the map to automatically set the longitude and latitude.
             </p>
             <div id="map" class="z-10"></div>
-            <!-- Button to trigger invalidateSize -->
-            <button type="button" onclick="invalidateMapSize()" class="mt-4">Adjust Map Display</button>
         </form>
     </x-bladewind::modal>
 
@@ -59,8 +56,8 @@
             var lat = parseFloat(e.latlng.lat.toFixed(6));
             var lng = parseFloat(e.latlng.lng.toFixed(6));
 
-            document.querySelector('input[name="longitude"]').value = lat;
-            document.querySelector('input[name="latitude"]').value = lng;
+            document.querySelector('input[name="longitude"]').value = lng;
+            document.querySelector('input[name="latitude"]').value = lat;
 
             popup
                 .setLatLng(e.latlng)

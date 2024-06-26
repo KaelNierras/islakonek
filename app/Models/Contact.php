@@ -11,6 +11,7 @@ class Contact extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'island_id',
         'first_name',
         'last_name',
         'age',

@@ -20,7 +20,7 @@
     @if (!is_null($selectedContact) && $selectedContact->longitude && $selectedContact->latitude)
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                var map = L.map('map').setView([{{ $selectedContact->longitude }}, {{ $selectedContact->latitude }}],
+                var map = L.map('map').setView([{{ $selectedContact->latitude }}, {{ $selectedContact->longitude }}],
                     16);
                 map.invalidateSize();
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -28,7 +28,7 @@
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 }).addTo(map);
 
-                L.marker([{{ $selectedContact->longitude }}, {{ $selectedContact->latitude }}]).addTo(map);
+                // L.marker([{{ $selectedContact->longitude }}, {{ $selectedContact->latitude }}]).addTo(map);
 
             });
         </script>
@@ -54,5 +54,6 @@
         function confirmDelete () {
             domEl('.delete-form').submit();
         }
+        
     </script>
 </div>

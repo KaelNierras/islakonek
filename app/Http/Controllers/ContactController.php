@@ -25,19 +25,21 @@ class ContactController extends Controller
     {
         try {
             $complete_location = $request->complete_location;
-            list($Longitude, $Latitude, $location) = explode(',', $complete_location);
+            list($Longitude, $Latitude, $location, $island_id) = explode(',', $complete_location);
 
             $request->merge([
                 'longitude' => $Longitude,
                 'latitude' => $Latitude,
                 'location' => $location,
+                'island_id' => $island_id,
             ]);
 
             $request->request->remove('complete_location');
 
-            ($request->all());
+            //dd($request->all());
 
             $data = $request->validate([
+                'island_id' => 'required',
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'age' => 'required|numeric',

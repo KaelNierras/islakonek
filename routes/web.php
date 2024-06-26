@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IslandController;
+use App\Http\Controllers\Auth\PasswordController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('dashboard', DashboardController::class);
     Route::resource('island', IslandController::class);
+
+    Route::post('/password/confirm', [PasswordController::class, 'confirm'])->name('password.confirm');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

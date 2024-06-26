@@ -21,7 +21,7 @@
                 class="rounded border-2 border-gray-200  focus:outline-none focus:ring-2 focus:ring-gray-200 w-full mb-3">
                 @foreach ($locations as $location)
                     <option
-                        value="{{ $location->longitude . ',' . $location->latitude . ',' . $location->name }}">
+                        value="{{ $location->longitude . ',' . $location->latitude . ',' . $location->name . ',' . $location->id }}">
                         {{ $location->name }}</option>
                 @endforeach
             </select>
