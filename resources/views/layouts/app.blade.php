@@ -53,7 +53,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main>
+        <main class="bg-gradient-to-r from-blue-50 to-blue-100">
             {{ $slot }}
         </main>
     </div>

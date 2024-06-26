@@ -6,7 +6,7 @@
     </x-slot>
     @include('components.notifications')
     <div class="py-5 md:py-12 content">
-        <div class="max-w-7xl mx-auto h-full sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-2 lg:px-2 bg-white shadow-sm py-4 rounded-xl">
             @livewire('island-table')
         </div>
     </div>

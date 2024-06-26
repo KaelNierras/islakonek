@@ -2,7 +2,7 @@
     @include('pages.island.partials.create-island-modal')
     @include('pages.island.partials.edit-island-modal')
     @include('pages.island.partials.delete-island-modal')
-    <div class="shadow-sm sm:rounded-lg h-full">
+    <div class="shadow-sm sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
             <!-- Table Title and Subtitle -->
             <div>
