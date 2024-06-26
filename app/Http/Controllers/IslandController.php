@@ -28,15 +28,20 @@ class IslandController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $data = $request->validate([
-            'name' => 'required|string|max:255|unique:islands,name',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-        ]);
-    
-        Island::create($data);
-        return redirect()->route('island.index')->with('success', 'Island created successfully.');
+        try {
+            $data = $request->validate([
+                'name' => 'required|string|max:255|unique:islands,name',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+            ]);
+
+            Island::create($data);
+
+            return redirect()->route('island.index')->with('success', 'Island created successfully.');
+        } catch (\Exception $e) {
+            // Redirect back with the specific error message from the exception
+            return redirect()->back()->with('error', 'Failed to create the island: ' . $e->getMessage())->withInput();
+        }
     }
     /**
      * Display the specified resource.
