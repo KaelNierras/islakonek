@@ -47,7 +47,8 @@
                 @endforeach
             </x-bladewind::table>
             <div class="mt-4">
-                {{ $islands->links('livewire.custom-pagination') }}
+                {{-- {{ $islands->links('livewire.custom-pagination') }} --}}
+                {{ $islands->links() }}
                 {{-- {{ $islands->links('vendor.pagination.tailwind') }} --}}
             </div>
         </div>

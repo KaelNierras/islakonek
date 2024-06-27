@@ -14,6 +14,8 @@ class DashboardController extends Controller
         $totalContacts = Contact::count();
         $totalIsland = Island::count();
 
-        return view('pages.dashboard.index', compact('totalUsers', 'totalContacts', 'totalIsland'));
+        $islands = Island::all();
+
+        return view('pages.dashboard.index', compact('totalUsers', 'totalContacts', 'totalIsland', 'islands'));
     }
 }

@@ -20,6 +20,6 @@ export default {
     },
 
     plugins: [forms],
-    darkMode: false, // Disables dark mode
+    darkMode: 'class',
 
 };

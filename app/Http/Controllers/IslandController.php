@@ -28,14 +28,39 @@ class IslandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
+        // Calculate population density if total_population and total_area are provided and total_area is not zero
+        $totalPopulation = intval($request->input('total_population'));
+        $totalArea = intval($request->input('total_area'));
+        $populationDensity = null;
+        if (!is_null($totalPopulation) && !is_null($totalArea) && $totalArea != 0) {
+            $populationDensity = $totalPopulation / $totalArea;
+        }
+
+        // Override the values in the request object
+        $request->merge([
+            'population_density' => $populationDensity,
+            'total_population' => $totalPopulation,
+            'total_area' => $totalArea,
+        ]);
+
         try {
             $data = $request->validate([
                 'name' => 'required|string|max:255|unique:islands,name',
                 'latitude' => 'required|numeric',
                 'longitude' => 'required|numeric',
+                'total_area' => 'nullable|numeric',
+                'total_population' => 'nullable|numeric',
+                'population_density' => 'nullable|numeric',
+                'description' => 'nullable|string',
             ]);
+
+            // Debugging line to dump the validated data
+            //dd($data);
+
+            // The population_density is already included in the request merge above, no need to add it again here
 
             Island::create($data);
 
@@ -50,7 +75,8 @@ class IslandController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $selectedIsland = Island::find($id);
+        return view('pages.island.show-island', compact('selectedIsland'));
     }
 
     /**
@@ -66,25 +92,48 @@ class IslandController extends Controller
      */
     public function update(Request $request, Island $island)
     {
+        $description = $request->input('description_edit');
+        $longitude = $request->input('longitude_edit');
+        $latitude = $request->input('latitude_edit');
+
+        // Calculate population density if total_population and total_area are provided and total_area is not zero
+        $totalPopulation = intval($request->input('total_population_edit'));
+        $totalArea = intval($request->input('total_area_edit'));
+        $populationDensity = null;
+        if (!is_null($totalPopulation) && !is_null($totalArea) && $totalArea != 0) {
+            $populationDensity = $totalPopulation / $totalArea;
+        }
+
+        $request->request->remove('total_population_edit');
+        $request->request->remove('total_area_edit');
+        $request->request->remove('description_edit');
+        $request->request->remove('longitude_edit');
+        $request->request->remove('latitude_edit');
+
+
+        // Override the values in the request object
+        $request->merge([
+            'population_density' => $populationDensity,
+            'total_population' => $totalPopulation,
+            'total_area' => $totalArea,
+            'description' => $description,
+            'longitude' => $longitude,
+            'latitude' => $latitude,
+        ]);
+
         try {
             $request->validate([
-                'name' => 'required|string|max:255|unique:islands,name',
-                'latitude_edit' => 'required|numeric',
-                'longitude_edit' => 'required|numeric',
+                'name' => 'required|string|max:255',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+                'total_area' => 'nullable|numeric',
+                'total_population' => 'nullable|numeric',
+                'population_density' => 'nullable|numeric',
+                'description' => 'nullable|string',
             ]);
-
-            // Change keys from latitude_edit and longitude_edit to latitude and longitude
-            $request['latitude'] = $request['latitude_edit'];
-            unset($request['latitude_edit']);
-
-            $request['longitude'] = $request['longitude_edit'];
-            unset($request['longitude_edit']);
 
             // Retrieve all contacts associated with the island
             $contacts = $island->contacts;
-
-            // Update the location of each contact to the new island name
-
 
             // Update the location, latitude, and longitude of each contact to match the new island details
             foreach ($contacts as $contact) {
