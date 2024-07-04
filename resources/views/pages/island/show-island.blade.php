@@ -9,7 +9,7 @@
         <div class="flex flex-col sm:flex-row gap-3">
             <x-bladewind::statistic number="{{ $selectedIsland->total_population }}" label="Total population" />
             <x-bladewind::statistic number="{{ $selectedIsland->total_area }} sq mi" label="Total area" />
-            <x-bladewind::statistic number="{{ $selectedIsland->population_density }}/sq mi" label="Populity Density" />
+            <x-bladewind::statistic number="{{ $selectedIsland->population_density }} sq mi" label="Populity Density" />
         </div>
     </x-slot>
 
